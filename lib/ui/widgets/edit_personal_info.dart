@@ -1,6 +1,7 @@
-import 'package:dashcast/core/models/UserModel.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/UserModel.dart';
+import 'package:fruit_veg/ui/viewutils/textutils.dart';
+
 class EditProfileDialog extends StatefulWidget {
   @override
   _EditProfileDialogState createState() => _EditProfileDialogState();
@@ -43,7 +44,7 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                   decoration: InputDecoration(labelText: "Full Name"),
                   controller: _fullNameController,
                   validator: (value) {
-                    if (value.isEmpty) return 'Please enter name';
+                    if (value!.isEmpty) return 'Please enter name';
                     return '';
                   },
                   onSaved: (newValue) {},
@@ -52,7 +53,7 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                   decoration: InputDecoration(labelText: "Email address"),
                   controller: _emailController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter email";
                     }
                     return '';
@@ -64,7 +65,7 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                   decoration: InputDecoration(labelText: "BirthDate"),
                   controller: _bithDateController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter birthdate";
                     }
                     return '';
@@ -80,11 +81,11 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                         child: Text('Female'), value: Gender.Female),
                   ],
                   onChanged: (value) {
-                    gender = value;
+                    gender = value!;
                   },
                   onSaved: (newValue) {
                     setState(() {
-                      gender = newValue;
+                      gender = newValue!;
                     });
                   },
                 ),
@@ -97,8 +98,8 @@ class _EditProfileDialogState extends State<EditProfileDialog> {
                         child: Text("Cancel")),
                     FlatButton(
                         onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _formKey.currentState.save();
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
                             Navigator.pop(
                                 context,
                                 User(

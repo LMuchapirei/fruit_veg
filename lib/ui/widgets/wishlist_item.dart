@@ -1,27 +1,25 @@
 import 'package:clay_containers/clay_containers.dart';
-import 'package:dashcast/ui/views/fruits_home.dart';
-import 'package:dashcast/ui/views/productpage.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fruit_veg/ui/views/fruits_home.dart';
+import 'package:fruit_veg/ui/views/productpage.dart';
+import 'package:fruit_veg/ui/viewutils/textutils.dart';
 import '../../core/models/Product.dart';
 
 class WishItemList extends StatelessWidget {
   final Product product;
-  WishItemList({this.product});
+  WishItemList({required this.product});
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
-             Navigator.of(context).push(
-               MaterialPageRoute(builder: 
-               (context)=>ProductPage(
-                 product: product,
-               ))
-             );
-           },
-          child: ClayContainer(
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductPage(
+                  product: product,
+                )));
+      },
+      child: ClayContainer(
         width: width,
         height: 90,
         // spread: 10,
@@ -57,7 +55,8 @@ class WishItemList extends StatelessWidget {
                   ),
                   Text(
                     product.rating.toString(),
-                    style: headerTextStyle.copyWith(fontSize: 15,fontWeight: FontWeight.w600),
+                    style: headerTextStyle.copyWith(
+                        fontSize: 15, fontWeight: FontWeight.w600),
                   )
                 ],
               )
@@ -72,7 +71,7 @@ class WishItemList extends StatelessWidget {
 class WishItemGrid extends StatelessWidget {
   final Product product;
 
-  const WishItemGrid({Key key, this.product}) : super(key: key);
+  const WishItemGrid({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +79,13 @@ class WishItemGrid extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final paddingConst = 20.0;
     return InkWell(
-         onTap: () {
-             Navigator.of(context).push(
-               MaterialPageRoute(builder: 
-               (context)=>ProductPage(
-                 product: product,
-               ))
-             );
-           },
-          child: ClayContainer(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductPage(
+                  product: product,
+                )));
+      },
+      child: ClayContainer(
         width: width / 2 - 2 * paddingConst,
         height: height * .25,
         color: Colors.white,
@@ -101,28 +98,49 @@ class WishItemGrid extends StatelessWidget {
                   image: AssetImage(product.imagePath),
                   fit: BoxFit.fill,
                 ))),
-            SizedBox(height: 10,),
-            Flexible(flex:4,
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(product.name,style: headerTextStyle.copyWith(fontSize:16),),
-                  Text("\$"+product.price.toString(),style: headerTextStyle.copyWith(fontSize:15),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+                flex: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(product.sales.toString()+" Sales",style: headerTextStyle.copyWith(fontSize:14),),
-                    Row(children: [
-                      Icon(FontAwesomeIcons.star,color: Colors.yellow,),
-                      Text(product.rating.toString(),style: headerTextStyle.copyWith(fontSize:14),)
-                    ],)
-                  ],)
-                ],
-              ),
-            ))
+                      Text(
+                        product.name,
+                        style: headerTextStyle.copyWith(fontSize: 16),
+                      ),
+                      Text(
+                        "\$" + product.price.toString(),
+                        style: headerTextStyle.copyWith(fontSize: 15),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            product.sales.toString() + " Sales",
+                            style: headerTextStyle.copyWith(fontSize: 14),
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.star,
+                                color: Colors.yellow,
+                              ),
+                              Text(
+                                product.rating.toString(),
+                                style: headerTextStyle.copyWith(fontSize: 14),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ))
           ],
         ),
       ),
@@ -130,23 +148,20 @@ class WishItemGrid extends StatelessWidget {
   }
 }
 
-
 class WishItemListFruit extends StatelessWidget {
   final FruitProduct product;
-  WishItemListFruit({this.product});
+  WishItemListFruit({required this.product});
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return InkWell(
-           onTap: () {
-             Navigator.of(context).push(
-               MaterialPageRoute(builder: 
-               (context)=>FruitCard(
-                 fruitProduct: product,
-               ))
-             );
-           },
-          child: ClayContainer(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FruitCard(
+                  fruitProduct: product,
+                )));
+      },
+      child: ClayContainer(
         width: width,
         height: 90,
         // spread: 10,
@@ -182,7 +197,8 @@ class WishItemListFruit extends StatelessWidget {
                   ),
                   Text(
                     product.rating.toString(),
-                    style: headerTextStyle.copyWith(fontSize: 15,fontWeight: FontWeight.w600),
+                    style: headerTextStyle.copyWith(
+                        fontSize: 15, fontWeight: FontWeight.w600),
                   )
                 ],
               )
@@ -197,7 +213,7 @@ class WishItemListFruit extends StatelessWidget {
 class WishItemFruitGrid extends StatelessWidget {
   final FruitProduct product;
 
-  const WishItemFruitGrid({Key key, this.product}) : super(key: key);
+  const WishItemFruitGrid({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -206,14 +222,12 @@ class WishItemFruitGrid extends StatelessWidget {
     final paddingConst = 20.0;
     return InkWell(
       onTap: () {
-             Navigator.of(context).push(
-               MaterialPageRoute(builder: 
-               (context)=>FruitCard(
-                 fruitProduct: product,
-               ))
-             );
-           },
-          child: ClayContainer(
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FruitCard(
+                  fruitProduct: product,
+                )));
+      },
+      child: ClayContainer(
         width: width / 2 - 2 * paddingConst,
         height: height * .25,
         color: Colors.white,
@@ -226,28 +240,49 @@ class WishItemFruitGrid extends StatelessWidget {
                   image: AssetImage(product.imagePath),
                   fit: BoxFit.fill,
                 ))),
-            SizedBox(height: 10,),
-            Flexible(flex:4,
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(product.name,style: headerTextStyle.copyWith(fontSize:16),),
-                  Text("\$"+product.price.toString(),style: headerTextStyle.copyWith(fontSize:15),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            SizedBox(
+              height: 10,
+            ),
+            Flexible(
+                flex: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(product.sales.toString()+" Sales",style: headerTextStyle.copyWith(fontSize:14),),
-                    Row(children: [
-                      Icon(FontAwesomeIcons.star,color: Colors.yellow,),
-                      Text(product.rating.toString(),style: headerTextStyle.copyWith(fontSize:14),)
-                    ],)
-                  ],)
-                ],
-              ),
-            ))
+                      Text(
+                        product.name,
+                        style: headerTextStyle.copyWith(fontSize: 16),
+                      ),
+                      Text(
+                        "\$" + product.price.toString(),
+                        style: headerTextStyle.copyWith(fontSize: 15),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            product.sales.toString() + " Sales",
+                            style: headerTextStyle.copyWith(fontSize: 14),
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.star,
+                                color: Colors.yellow,
+                              ),
+                              Text(
+                                product.rating.toString(),
+                                style: headerTextStyle.copyWith(fontSize: 14),
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ))
           ],
         ),
       ),

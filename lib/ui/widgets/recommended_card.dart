@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import '../../core/models/Product.dart';
 import '../../ui/viewutils/textutils.dart';
 import 'package:clay_containers/clay_containers.dart';
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class RecommendedProduct extends StatelessWidget {
   final Product product;
 
-  const RecommendedProduct({Key key, this.product}) : super(key: key);
+  const RecommendedProduct({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,11 @@ class BottomContainer extends StatelessWidget {
   final double price;
 
   const BottomContainer(
-      {Key key, this.productName, this.productSales, this.rating, this.price})
+      {Key? key,
+      required this.productName,
+      required this.productSales,
+      required this.rating,
+      required this.price})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -106,15 +109,10 @@ class BottomContainer extends StatelessWidget {
   }
 }
 
-
-
-
-
-
 class RecommendedCard extends StatelessWidget {
   final Product product;
 
-  const RecommendedCard({Key key, this.product}) : super(key: key);
+  const RecommendedCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,28 +133,49 @@ class RecommendedCard extends StatelessWidget {
                 image: AssetImage(product.imagePath),
                 fit: BoxFit.fill,
               ))),
-          SizedBox(height: 10,),
-          Flexible(flex:4,
-          child: Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(product.name,style: headerTextStyle.copyWith(fontSize:16),),
-                Text("\$"+product.price.toString(),style: headerTextStyle.copyWith(fontSize:15),),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          SizedBox(
+            height: 10,
+          ),
+          Flexible(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text(product.sales.toString()+" Sales",style: headerTextStyle.copyWith(fontSize:14),),
-                  Row(children: [
-                    Icon(FontAwesomeIcons.star,color: Colors.yellow,),
-                    Text(product.rating.toString(),style: headerTextStyle.copyWith(fontSize:14),)
-                  ],)
-                ],)
-              ],
-            ),
-          ))
+                    Text(
+                      product.name,
+                      style: headerTextStyle.copyWith(fontSize: 16),
+                    ),
+                    Text(
+                      "\$" + product.price.toString(),
+                      style: headerTextStyle.copyWith(fontSize: 15),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          product.sales.toString() + " Sales",
+                          style: headerTextStyle.copyWith(fontSize: 14),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.star,
+                              color: Colors.yellow,
+                            ),
+                            Text(
+                              product.rating.toString(),
+                              style: headerTextStyle.copyWith(fontSize: 14),
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ))
         ],
       ),
     );

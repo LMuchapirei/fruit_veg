@@ -1,6 +1,6 @@
-import 'package:dashcast/core/viewmodels/notifiers/cart_notifier.dart';
-import 'package:dashcast/core/viewmodels/notifiers/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/cart_notifier.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/wishlist_notifier.dart';
 import 'package:provider/provider.dart';
 import '../../core/models/Product.dart';
 import '../../ui/views/productpage.dart';
@@ -10,7 +10,8 @@ class ProductCard extends StatelessWidget {
   final Product product;
   final double discount;
 
-  const ProductCard({Key key, this.product,this.discount}) : super(key: key);
+  const ProductCard({Key? key, required this.product, required this.discount})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -18,14 +19,12 @@ class ProductCard extends StatelessWidget {
         // navigate to the prodyct details page
         print("pressed on tap");
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ProductPage(
-            product:product
-          ),
+          builder: (context) => ProductPage(product: product),
         ));
       },
       child: Container(
         width: 180,
-        height: MediaQuery.of(context).size.height*.25,   //from 200
+        height: MediaQuery.of(context).size.height * .25, //from 200
         decoration: BoxDecoration(
           color: closeWhiteBackground,
           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -38,17 +37,18 @@ class ProductCard extends StatelessWidget {
               top: 0,
               left: 0,
               child: Container(
-                height:MediaQuery.of(context).size.height*.25*0.6,// 120,
+                height: MediaQuery.of(context).size.height * .25 * 0.6, // 120,
                 width: 180,
                 child: Image.asset(product.imagePath),
               ),
             ),
-            Positioned(top: 10, right: 2, child: CircularButton(discount:discount)),
+            Positioned(
+                top: 10, right: 2, child: CircularButton(discount: discount)),
             Positioned(
               left: 0,
               bottom: 0,
               width: 180,
-              child: BottomContainer(product:product),
+              child: BottomContainer(product: product),
             )
           ],
         ),
@@ -60,7 +60,7 @@ class ProductCard extends StatelessWidget {
 class CircularButton extends StatelessWidget {
   final double discount;
 
-  const CircularButton({Key key, this.discount}) : super(key: key);
+  const CircularButton({Key? key, required this.discount}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,7 +86,7 @@ class CircularButton extends StatelessWidget {
 class BottomContainer extends StatelessWidget {
   final Product product;
 
-  const BottomContainer({Key key, this.product}) : super(key: key);
+  const BottomContainer({Key? key, required this.product}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -103,7 +103,9 @@ class BottomContainer extends StatelessWidget {
             children: <Widget>[
               Text(
                 product.sales.toString(),
-                style: headerTextStyle.copyWith(fontSize: 12,),
+                style: headerTextStyle.copyWith(
+                  fontSize: 12,
+                ),
               ),
               Row(
                 children: <Widget>[
@@ -113,7 +115,8 @@ class BottomContainer extends StatelessWidget {
                   ),
                   Text(
                     product.rating.toString(),
-                    style: headerTextStyle.copyWith(fontWeight: FontWeight.bold),
+                    style:
+                        headerTextStyle.copyWith(fontWeight: FontWeight.bold),
                   )
                 ],
               )
@@ -160,13 +163,12 @@ class BottomContainer extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-GestureDetector(
-  onTap: () {
-    final cartNotifier=Provider.of<CartNotifier>(context);
-    cartNotifier.addProduct(product);
-
-  },
-                                  child: Container(
+                GestureDetector(
+                  onTap: () {
+                    final cartNotifier = Provider.of<CartNotifier>(context);
+                    cartNotifier.addProduct(product);
+                  },
+                  child: Container(
                     decoration: BoxDecoration(
                       color: buttonColor,
                       borderRadius: BorderRadius.horizontal(
@@ -193,14 +195,15 @@ GestureDetector(
                   ),
                 ),
                 InkWell(
-                  
-                  onTap: () { 
-                  Provider.of<WishListNotifier>(context).addProduct(product);
-                  },
-                  child:Icon(Icons.favorite,
-                  color: Colors.red,
-                  size: 15,
-                ))
+                    onTap: () {
+                      Provider.of<WishListNotifier>(context)
+                          .addProduct(product);
+                    },
+                    child: Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                      size: 15,
+                    ))
               ],
             ),
           )

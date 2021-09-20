@@ -1,11 +1,9 @@
-import 'package:dashcast/core/viewmodels/notifiers/fruit_products_notifier.dart';
-import 'package:dashcast/ui/views/fruits_home.dart';
-import 'package:dashcast/ui/viewutils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/fruit_products_notifier.dart';
+import 'package:fruit_veg/ui/views/fruits_home.dart';
 import 'package:provider/provider.dart';
 import '../viewutils/textutils.dart';
+
 class RecommendedFruits extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,33 +14,27 @@ class RecommendedFruits extends StatelessWidget {
       length: fruitCategoryProvider.length,
       child: Scaffold(
         body: Container(
-          
           child: SingleChildScrollView(
-                      child: Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 TabBar(
                     isScrollable: true,
-                    indicator:  BoxDecoration(
+                    indicator: BoxDecoration(
                       color: iconColor,
-                                        borderRadius: BorderRadius.horizontal(
-                                            left: Radius.circular(20),
-                                            right: Radius.circular(20)),
-                            ),
-                    labelStyle: headerTextStyle.copyWith(
-                      color: Colors.white
+                      borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(20),
+                          right: Radius.circular(20)),
                     ),
-                    unselectedLabelStyle: headerTextStyle.copyWith(
-                      color:headerTextColor
-                    ),
+                    labelStyle: headerTextStyle.copyWith(color: Colors.white),
+                    unselectedLabelStyle:
+                        headerTextStyle.copyWith(color: headerTextColor),
                     tabs: fruitCategoryProvider
                         .map((provider) => Tab(
                               child: Text(
                                 provider.categoryName,
                                 style: headerTextStyle.copyWith(
-                                  color:headerTextColor
-                                ),
-
+                                    color: headerTextColor),
                               ),
                             ))
                         .toList()),
@@ -62,7 +54,7 @@ class RecommendedFruits extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                     height: MediaQuery.of(context).size.height*.65,
+                    height: MediaQuery.of(context).size.height * .65,
                     child: TabBarView(
                       children: fruitCategoryProvider
                           .map((provider) => ProductList(
@@ -84,7 +76,7 @@ class RecommendedFruits extends StatelessWidget {
 class ProductList extends StatelessWidget {
   final FruitProductCategory provider;
 
-  const ProductList({Key key, this.provider}) : super(key: key);
+  const ProductList({Key? key, required this.provider}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     provider.intialiseProducts();

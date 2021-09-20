@@ -80,6 +80,7 @@ class _FruitsHomeState extends State<FruitsHome> {
                               imagePath: category.imagePath,
                               title: category.categoryName,
                               fruitVariety: category.variety,
+                              press: () {},
                             ),
                           ))
                       .toList(),
