@@ -1,6 +1,6 @@
-import 'package:dashcast/core/models/user_model.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/user_model.dart';
+import 'package:fruit_veg/ui/viewutils/textutils.dart';
 
 class EditAddressDialog extends StatefulWidget {
   @override
@@ -18,8 +18,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height*.5,
-      width: MediaQuery.of(context).size.width*0.6,
+      height: MediaQuery.of(context).size.height * .5,
+      width: MediaQuery.of(context).size.width * 0.6,
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Form(
@@ -46,7 +46,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   decoration: InputDecoration(labelText: 'Address'),
                   controller: _addressController,
                   validator: (value) {
-                    if (value.isEmpty) return 'Please enter address';
+                    if (value!.isEmpty) return 'Please enter address';
                     return '';
                   },
                   onSaved: (newValue) {},
@@ -55,7 +55,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   decoration: InputDecoration(labelText: "Company"),
                   controller: _companyController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter Company";
                     }
                     return '';
@@ -66,7 +66,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   decoration: InputDecoration(labelText: "City"),
                   controller: _cityController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter City";
                     }
                     return '';
@@ -77,7 +77,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   decoration: InputDecoration(labelText: "Postal Code"),
                   controller: _postalCodeController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter Postal Code";
                     }
                     return '';
@@ -88,7 +88,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   decoration: InputDecoration(labelText: "Country"),
                   controller: _countryController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter country field";
                     }
                     return '';
@@ -99,7 +99,7 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                   decoration: InputDecoration(labelText: "Region"),
                   controller: _regionController,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please enter region field";
                     }
                     return '';
@@ -115,8 +115,8 @@ class _EditAddressDialogState extends State<EditAddressDialog> {
                         child: Text("Cancel")),
                     FlatButton(
                         onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _formKey.currentState.save();
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
                             Navigator.pop(
                                 context,
                                 AddressDetails(

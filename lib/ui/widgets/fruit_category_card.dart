@@ -1,19 +1,20 @@
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/ui/viewutils/constants.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/Product.dart';
+import 'package:fruit_veg/ui/viewutils/constants.dart';
+import 'package:fruit_veg/ui/viewutils/textutils.dart';
+
 class FruitCategoryCard extends StatelessWidget {
   final String imagePath;
   final String title;
   final Function press;
   final FruitVariety fruitVariety;
-  const FruitCategoryCard({
-    Key key,
-    this.imagePath,
-    this.title,
-    this.press,
-    this.fruitVariety
-  }) : super(key: key);
+  const FruitCategoryCard(
+      {Key? key,
+      required this.imagePath,
+      required this.title,
+      required this.press,
+      required this.fruitVariety})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +37,25 @@ class FruitCategoryCard extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: press,
+            onTap: () {
+              press();
+            },
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: <Widget>[
                   Spacer(),
                   Image(
-                    image:AssetImage(
+                    image: AssetImage(
                       imagePath,
-
                     ),
-fit:BoxFit.scaleDown ,
+                    fit: BoxFit.scaleDown,
                   ),
                   Spacer(),
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style:headerTextStyle.copyWith(
-                      fontSize: 16
-                    ),
+                    style: headerTextStyle.copyWith(fontSize: 16),
                   )
                 ],
               ),

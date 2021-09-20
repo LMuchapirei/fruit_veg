@@ -125,13 +125,13 @@ class _AccountState extends State<Account> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    userData.user.user.fullName,
+                                    userData.user!.user.fullName,
                                     style: headerTextStyle,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      userData.user.user.emailAdress,
+                                      userData.user!.user.emailAdress,
                                       style: TextStyle(
                                           fontSize: 12, color: iconColor),
                                     ),
@@ -403,7 +403,7 @@ class _AccountState extends State<Account> {
                                             var user =
                                                 await _getUserDetails(context);
                                             // print(user.birthDate+"  "+user.emailAdress+" another one");
-                                            userData.resetUser(user);
+                                            userData.resetUser(user!);
                                           },
                                           child: Text(
                                             'Edit',
@@ -421,7 +421,7 @@ class _AccountState extends State<Account> {
                                           "Full name",
                                           style: accountText2,
                                         ),
-                                        Text(userData.user.user.fullName,
+                                        Text(userData.user!.user.fullName,
                                             style: accountText3),
                                       ],
                                     ),
@@ -436,7 +436,7 @@ class _AccountState extends State<Account> {
                                           "Email",
                                           style: accountText2,
                                         ),
-                                        Text(userData.user.user.emailAdress,
+                                        Text(userData.user!.user.emailAdress,
                                             style: accountText3)
                                       ],
                                     ),
@@ -451,7 +451,7 @@ class _AccountState extends State<Account> {
                                           "Telephone",
                                           style: accountText2,
                                         ),
-                                        Text(userData.user.phoneNumber,
+                                        Text(userData.user!.phoneNumber,
                                             style: accountText3),
                                       ],
                                     ),
@@ -466,7 +466,7 @@ class _AccountState extends State<Account> {
                                           "Gender",
                                           style: accountText2,
                                         ),
-                                        Text(userData.user.user.genderGetter,
+                                        Text(userData.user!.user.genderGetter,
                                             style: accountText3),
                                       ],
                                     ),
@@ -481,7 +481,7 @@ class _AccountState extends State<Account> {
                                           "Birth Date",
                                           style: accountText2,
                                         ),
-                                        Text(userData.user.user.birthDate,
+                                        Text(userData.user!.user.birthDate,
                                             style: accountText3),
                                       ],
                                     ),
@@ -549,7 +549,7 @@ class _AccountState extends State<Account> {
                                           style: accountText2,
                                         ),
                                         Text(
-                                          userData.user.address1,
+                                          userData.user!.address1,
                                           style: accountText3,
                                         )
                                       ],
@@ -566,7 +566,7 @@ class _AccountState extends State<Account> {
                                           style: accountText2,
                                         ),
                                         Text(
-                                          userData.user.city,
+                                          userData.user!.city,
                                           style: accountText3,
                                         )
                                       ],
@@ -583,7 +583,7 @@ class _AccountState extends State<Account> {
                                           style: accountText2,
                                         ),
                                         Text(
-                                          userData.user.postCode,
+                                          userData.user!.postCode,
                                           style: accountText3,
                                         )
                                       ],
@@ -600,7 +600,7 @@ class _AccountState extends State<Account> {
                                           style: accountText2,
                                         ),
                                         Text(
-                                          userData.user.country,
+                                          userData.user!.country,
                                           style: accountText3,
                                         )
                                       ],
@@ -617,7 +617,7 @@ class _AccountState extends State<Account> {
                                           style: accountText2,
                                         ),
                                         Text(
-                                          userData.user.region,
+                                          userData.user!.region,
                                           style: accountText3,
                                         )
                                       ],

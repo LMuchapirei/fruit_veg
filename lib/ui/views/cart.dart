@@ -148,8 +148,10 @@ class _CartState extends State<Cart> {
                           Container(
                             height: MediaQuery.of(context).size.height * .65,
                             child: TabBarView(children: [
-                              _getCartProducts(cart.products),
-                              _getCartProductsFruits(cart.fruitProducts)
+                              _getCartProducts(
+                                  cart.products.toList() as List<Product>),
+                              _getCartProductsFruits(cart.fruitProducts.toList()
+                                  as List<FruitProduct>)
                             ]),
                           )
                         ])),

@@ -1,8 +1,8 @@
 import 'dart:collection';
 import 'dart:math';
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/core/viewmodels/notifiers/product_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/Product.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/product_notifier.dart';
 
 const TAX_RATE = 0.145;
 
@@ -27,21 +27,26 @@ class CartNotifier extends ChangeNotifier {
   double get totalTax => _totalTax;
   double get subTotal => _subTotal;
   int get itemsCount => _itemsCount;
-  int  currentUnitFruitCount(UnitProductFruit unitProductFruit)=>_unitProductFruits[getIndexOfUnitFruit(unitProductFruit)].quantity;
-  int currentUnitVegeCount(UnitProductVegetable unitProductVegetable)=>_unitProductVegetables[getIndexOfUnitVegetable(unitProductVegetable)].quantity;
+  int currentUnitFruitCount(UnitProductFruit unitProductFruit) =>
+      _unitProductFruits[getIndexOfUnitFruit(unitProductFruit)].quantity;
+  int currentUnitVegeCount(UnitProductVegetable unitProductVegetable) =>
+      _unitProductVegetables[getIndexOfUnitVegetable(unitProductVegetable)]
+          .quantity;
   // get index of the product
-  // get the quantity of the object 
+  // get the quantity of the object
   //return this
-  int getIndexOfUnitFruit(UnitProductFruit unitProductFruit){
-     var index = _unitProductFruits.indexWhere(
-          (element) => equalityTesterUnitFruit(element, unitProductFruit));
-      return index;
+  int getIndexOfUnitFruit(UnitProductFruit unitProductFruit) {
+    var index = _unitProductFruits.indexWhere(
+        (element) => equalityTesterUnitFruit(element, unitProductFruit));
+    return index;
   }
-  int getIndexOfUnitVegetable(UnitProductVegetable unitProductVegetable){
-     var index = _unitProductVegetables.indexWhere(
-          (element) => equalityTesterUnitVeges(element, unitProductVegetable));
-      return index;
+
+  int getIndexOfUnitVegetable(UnitProductVegetable unitProductVegetable) {
+    var index = _unitProductVegetables.indexWhere(
+        (element) => equalityTesterUnitVeges(element, unitProductVegetable));
+    return index;
   }
+
   bool removeProduct(Product product) {
     // check if  product exists
     bool exists = _products.contains(product);
@@ -85,7 +90,6 @@ class CartNotifier extends ChangeNotifier {
       notifyListeners();
     }
     return exists;
-    
   }
 
   bool removeUnitVegetable(UnitProductVegetable unitProductVegetable) {
@@ -133,8 +137,7 @@ class CartNotifier extends ChangeNotifier {
       ++_unitProductFruits[index].quantity;
       print('after increment quantity ${_unitProductFruits[index].quantity}');
       // change the tax totals
-      _totalCost = _totalCost +
-          (unitProductFruit.unitCost * 1);
+      _totalCost = _totalCost + (unitProductFruit.unitCost * 1);
       _totalTax = _totalCost * TAX_RATE;
       _subTotal = _totalTax + _totalCost;
       notifyListeners();
@@ -145,13 +148,13 @@ class CartNotifier extends ChangeNotifier {
       var index = _unitProductFruits.indexWhere(
           (element) => equalityTesterUnitFruit(element, unitProductFruit));
       ++_unitProductFruits[index].quantity;
-      _totalCost = _totalCost +
-          (unitProductFruit.unitCost *1);
+      _totalCost = _totalCost + (unitProductFruit.unitCost * 1);
       _totalTax = _totalCost * TAX_RATE;
       _subTotal = _totalTax + _totalCost;
       notifyListeners();
     }
   }
+
   bool equalityTesterUnitFruit(UnitProductFruit p1, UnitProductFruit p2) {
     return p1.barCode == p2.barCode &&
         p1.description == p2.description &&
@@ -177,7 +180,6 @@ class CartNotifier extends ChangeNotifier {
   }
 
   void addUnitProductVegetable(UnitProductVegetable unitProductVegetable) {
-
     //process  find if product is in
     //if in increment the quantity
     //not in add it for the first time
@@ -198,9 +200,7 @@ class CartNotifier extends ChangeNotifier {
       print(
           'after increment quantity ${_unitProductVegetables[index].quantity}');
       // change the tax totals
-      _totalCost = _totalCost +
-          (unitProductVegetable.unitCost *
-              1);
+      _totalCost = _totalCost + (unitProductVegetable.unitCost * 1);
       _totalTax = _totalCost * TAX_RATE;
       _subTotal = _totalTax + _totalCost;
       notifyListeners();
@@ -211,9 +211,7 @@ class CartNotifier extends ChangeNotifier {
       var index = _unitProductVegetables.indexWhere(
           (element) => equalityTesterUnitVeges(element, unitProductVegetable));
       ++_unitProductVegetables[index].quantity;
-      _totalCost = _totalCost +
-          (unitProductVegetable.unitCost *
-              1);
+      _totalCost = _totalCost + (unitProductVegetable.unitCost * 1);
       _totalTax = _totalCost * TAX_RATE;
       _subTotal = _totalTax + _totalCost;
       notifyListeners();
@@ -267,7 +265,6 @@ class CartNotifier extends ChangeNotifier {
     // get the total
     // and then call payment methods
     // persit changes to database
-    
   }
 
   void productLoader() {
@@ -279,58 +276,54 @@ class CartNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool removeUnitProductFruit(UnitProductFruit fruitItem){
-      bool exists=containsUnitFruit(fruitItem);
-      print("$exists test");
-      if(exists){
-        var index=getIndexOfUnitFruit(fruitItem);
-        print("${currentUnitFruitCount(fruitItem)} current quantity");
-        if(_unitProductFruits[index].quantity>0){
-          --_unitProductFruits[index].quantity;
-          print(_totalCost);
-          _totalCost = _totalCost -
-          (_unitProductFruits[index].unitCost *
-              1);
-      _totalTax = _totalCost * TAX_RATE;
-      _subTotal = _totalTax + _totalCost;
-      print(_totalCost);
-          notifyListeners();
-        }else{
-         var removed= _unitProductFruits.removeAt(index);
-         print(removed);
-         --_itemsCount;
-          notifyListeners();
-        }
-        exists=containsUnitFruit(fruitItem);
+  bool removeUnitProductFruit(UnitProductFruit fruitItem) {
+    bool exists = containsUnitFruit(fruitItem);
+    print("$exists test");
+    if (exists) {
+      var index = getIndexOfUnitFruit(fruitItem);
+      print("${currentUnitFruitCount(fruitItem)} current quantity");
+      if (_unitProductFruits[index].quantity > 0) {
+        --_unitProductFruits[index].quantity;
+        print(_totalCost);
+        _totalCost = _totalCost - (_unitProductFruits[index].unitCost * 1);
+        _totalTax = _totalCost * TAX_RATE;
+        _subTotal = _totalTax + _totalCost;
+        print(_totalCost);
+        notifyListeners();
+      } else {
+        var removed = _unitProductFruits.removeAt(index);
+        print(removed);
+        --_itemsCount;
+        notifyListeners();
       }
+      exists = containsUnitFruit(fruitItem);
+    }
 
-      return exists;
+    return exists;
   }
 
-    bool removeUnitProductVeges(UnitProductVegetable vegetable){
-      bool exists=containsUnitVeges(vegetable);
-      print("$exists test");
-      if(exists){
-        var index=getIndexOfUnitVegetable(vegetable);
-        
-        if(_unitProductVegetables[index].quantity>0){
-          --_unitProductVegetables[index].quantity;
-           _totalCost = _totalCost -
-          (_unitProductVegetables[index].unitCost *
-              1);
-      _totalTax = _totalCost * TAX_RATE;
-      _subTotal = _totalTax + _totalCost;
-          notifyListeners();
-        }else{
-         var removed= _unitProductVegetables.removeAt(index);
-         print(removed);
-          --_itemsCount;
-          notifyListeners();
-        }
-        exists=containsUnitVeges(vegetable);
-      }
+  bool removeUnitProductVeges(UnitProductVegetable vegetable) {
+    bool exists = containsUnitVeges(vegetable);
+    print("$exists test");
+    if (exists) {
+      var index = getIndexOfUnitVegetable(vegetable);
 
-      return exists;
+      if (_unitProductVegetables[index].quantity > 0) {
+        --_unitProductVegetables[index].quantity;
+        _totalCost = _totalCost - (_unitProductVegetables[index].unitCost * 1);
+        _totalTax = _totalCost * TAX_RATE;
+        _subTotal = _totalTax + _totalCost;
+        notifyListeners();
+      } else {
+        var removed = _unitProductVegetables.removeAt(index);
+        print(removed);
+        --_itemsCount;
+        notifyListeners();
+      }
+      exists = containsUnitVeges(vegetable);
+    }
+
+    return exists;
   }
 
   bool containsUnitFruit(UnitProductFruit fruitItem) {

@@ -1,11 +1,11 @@
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/core/models/UserModel.dart';
-import 'package:dashcast/core/models/order.dart';
-import 'package:dashcast/core/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/Product.dart';
+import 'package:fruit_veg/core/models/UserModel.dart';
+import 'package:fruit_veg/core/models/order.dart';
+import 'package:fruit_veg/core/models/user_model.dart';
 
 class Userdata extends ChangeNotifier {
-  UserModel _user;
+  UserModel? _user = null;
   List<Order> _unpaid = [];
   List<Order> _toShip = [];
   List<Order> _shipped = [];
@@ -29,7 +29,7 @@ class Userdata extends ChangeNotifier {
         region: "Harare");
     myOrders = tempOrders;
     myOrders.forEach((element) {
-      if(!element.paid){
+      if (!element.paid) {
         _unpaid.add(element);
       }
     });
@@ -38,7 +38,7 @@ class Userdata extends ChangeNotifier {
     //   _toShip.add(item);
     // });
     myOrders.forEach((element) {
-      if(!element.delivered){
+      if (!element.delivered) {
         _toShip.add(element);
       }
     });
@@ -55,7 +55,7 @@ class Userdata extends ChangeNotifier {
     });
   }
   List<Order> myOrders = <Order>[];
-  
+
   // List<Order> get unpaid=>myOrders.where((element) => !element.paid).toList();
   // List<Order> get toShip=>myOrders.isEmpty?0:myOrders.where((element) => !element.delivered).toList();
   // List<Order> get shipped=>myOrders.isEmpty?0:myOrders.where((element)=>element.delivered).toList();
@@ -65,19 +65,19 @@ class Userdata extends ChangeNotifier {
   List<Order> get toShip => _toShip;
   List<Order> get shipped => _shipped;
   List<Order> get issues => _issues;
-  UserModel get user => _user;
+  UserModel? get user => _user;
   Future<void> resetUser(User user) {
     notifyListeners();
     if (user != null) {
-      _user.user = user;
+      _user!.user = user;
       // change it in the api
-      print(_user.user.birthDate +
+      print(_user!.user.birthDate +
           " " +
-          _user.user.emailAdress +
+          _user!.user.emailAdress +
           "  " +
-          _user.user.genderGetter +
+          _user!.user.genderGetter +
           " " +
-          _user.user.birthDate);
+          _user!.user.birthDate);
     }
     notifyListeners();
     return Future.value();
@@ -86,22 +86,19 @@ class Userdata extends ChangeNotifier {
   Future<void> resetAddressData(AddressDetails addressDetails) {
     notifyListeners();
     if (addressDetails != null) {
-      _user.address1 = addressDetails.address1;
-      _user.address2 = addressDetails.address2;
-      _user.city = addressDetails.city;
-      _user.company = addressDetails.company;
-      _user.country = addressDetails.country;
-      _user.phoneNumber = '+263787452541';
-      _user.postCode = addressDetails.postCode;
-      _user.region = addressDetails.region;
+      _user!.address1 = addressDetails.address1;
+      _user!.address2 = addressDetails.address2;
+      _user!.city = addressDetails.city;
+      _user!.company = addressDetails.company;
+      _user!.country = addressDetails.country;
+      _user!.phoneNumber = '+263787452541';
+      _user!.postCode = addressDetails.postCode;
+      _user!.region = addressDetails.region;
     }
     notifyListeners();
     return Future.value();
   }
 
-  List<Product> _wishList=[
-    
-  ];
-  List<Product> get wishList=>_wishList;
+  List<Product> _wishList = [];
+  List<Product> get wishList => _wishList;
 }
-

@@ -1,7 +1,7 @@
 import 'dart:collection';
-import 'package:dashcast/core/viewmodels/notifiers/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/wishlist_notifier.dart';
 import 'package:provider/provider.dart';
 import '../../core/models/Product.dart';
 import '../../ui/views/cart.dart';
@@ -35,42 +35,35 @@ class _WishListDefaultPageState extends State<WishListDefaultPage> {
   View _selectedView = View.GRID;
   Color _selectedViewIconColor = iconColor;
   Widget _buildList(UnmodifiableListView<Product> inputList) {
-    return inputList.isEmpty?
-    Center(
-      child:Text(
-        'No Products Add'
-      )
-    )
-    :Column(
-      children: inputList
-          .map((product) => Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: WishItemList(
-                  product: product,
-                ),
-              ))
-          .toList(),
-    );
+    return inputList.isEmpty
+        ? Center(child: Text('No Products Add'))
+        : Column(
+            children: inputList
+                .map((product) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: WishItemList(
+                        product: product,
+                      ),
+                    ))
+                .toList(),
+          );
   }
 
   Widget _buildFruitList(UnmodifiableListView<FruitProduct> inputList) {
-    return inputList.isEmpty?
-    Center(
-      // build something interesting for this
-      child:Text(
-        'No Products Add'
-      )
-    )
-    :Column(
-      children: inputList
-          .map((product) => Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: WishItemListFruit(
-                  product: product,
-                ),
-              ))
-          .toList(),
-    );
+    return inputList.isEmpty
+        ? Center(
+            // build something interesting for this
+            child: Text('No Products Add'))
+        : Column(
+            children: inputList
+                .map((product) => Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: WishItemListFruit(
+                        product: product,
+                      ),
+                    ))
+                .toList(),
+          );
   }
 
   @override
@@ -145,54 +138,55 @@ class _WishListDefaultPageState extends State<WishListDefaultPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TabBar(
-                      indicatorColor: Colors.transparent,
-                      labelColor: headerTextColor,
-                      unselectedLabelColor: Colors.grey,
-                      labelStyle: headerTextStyle,
-                      unselectedLabelStyle: headerTextStyle.copyWith(
-                        color:Colors.grey
-                      ),
-                      tabs: [
-                      Tab(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(20),
-                                  right: Radius.circular(20)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(color: Colors.black54, blurRadius: 2)
-                              ]),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right: 16, left: 16, top: 12, bottom: 12),
-                            child: Text(
-                              "Vegetables",
-                              // style: headerTextStyle.copyWith(fontSize: 18),
+                        indicatorColor: Colors.transparent,
+                        labelColor: headerTextColor,
+                        unselectedLabelColor: Colors.grey,
+                        labelStyle: headerTextStyle,
+                        unselectedLabelStyle:
+                            headerTextStyle.copyWith(color: Colors.grey),
+                        tabs: [
+                          Tab(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(20),
+                                      right: Radius.circular(20)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black54, blurRadius: 2)
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: 16, left: 16, top: 12, bottom: 12),
+                                child: Text(
+                                  "Vegetables",
+                                  // style: headerTextStyle.copyWith(fontSize: 18),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.horizontal(
-                                  left: Radius.circular(20),
-                                  right: Radius.circular(20)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(color: Colors.black54, blurRadius: 2)
-                              ]),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                right: 16, left: 16, top: 12, bottom: 12),
-                            child: Text("Fruits",
-                                
+                          Tab(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(20),
+                                      right: Radius.circular(20)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black54, blurRadius: 2)
+                                  ]),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: 16, left: 16, top: 12, bottom: 12),
+                                child: Text(
+                                  "Fruits",
                                 ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ]),
+                        ]),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -280,7 +274,10 @@ class VegetablesTab extends StatelessWidget {
       products; //[find a way to accept both list and determine how to andle each type]
 
   const VegetablesTab(
-      {Key key, this.selectedView, this.buildList, this.products})
+      {Key? key,
+      required this.selectedView,
+      required this.buildList,
+      required this.products})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -312,7 +309,11 @@ class FruitsTab extends StatelessWidget {
   final UnmodifiableListView<FruitProduct>
       products; //[find a way to accept both list and determine how to andle each type]
 
-  const FruitsTab({Key key, this.selectedView, this.buildList, this.products})
+  const FruitsTab(
+      {Key? key,
+      required this.selectedView,
+      required this.buildList,
+      required this.products})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -330,7 +331,9 @@ class FruitsTab extends StatelessWidget {
               children: products
                   .map((product) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: WishItemFruitGrid(product:product ,),
+                        child: WishItemFruitGrid(
+                          product: product,
+                        ),
                       ))
                   .toList(),
               crossAxisCount: 2)

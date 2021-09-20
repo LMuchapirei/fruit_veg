@@ -1,13 +1,15 @@
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
-import 'package:dashcast/ui/widgets/unit_items.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/Product.dart';
+import 'package:fruit_veg/ui/viewutils/textutils.dart';
+import 'package:fruit_veg/ui/widgets/unit_items.dart';
 
-const trimEnumValueFruits=13;
+const trimEnumValueFruits = 13;
+
 class CartItemUnitFruit extends StatelessWidget {
   final UnitProductFruit unitProductFruit;
 
-  const CartItemUnitFruit({Key key, this.unitProductFruit}) : super(key: key);
+  const CartItemUnitFruit({Key? key, required this.unitProductFruit})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -15,7 +17,7 @@ class CartItemUnitFruit extends StatelessWidget {
     return Container(
       width: width,
       height: height * .15,
-       decoration: BoxDecoration(
+      decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey, width: 2))),
       child: ListTile(
         leading: Container(
@@ -41,24 +43,22 @@ class CartItemUnitFruit extends StatelessWidget {
                     style: subtitleStyle)
               ],
             ),
-             Column(
-                children: [Text('Rating'), 
-                Text('⭐${unitProductFruit.rating}',style: subtitleStyle)
-                
-                ],
-              ),
-              Column(
-                children: [Text('UnitPrice'), 
-               
-                Text('${unitProductFruit.unitCost}',style: subtitleStyle)
-                ]
-              ),
-              Column(
-                children: [Text('Variety'), 
-               
-                Text('${unitProductFruit.variety.toString().substring(trimEnumValueFruits)}',style: subtitleStyle)
-            
-                ]),
+            Column(
+              children: [
+                Text('Rating'),
+                Text('⭐${unitProductFruit.rating}', style: subtitleStyle)
+              ],
+            ),
+            Column(children: [
+              Text('UnitPrice'),
+              Text('${unitProductFruit.unitCost}', style: subtitleStyle)
+            ]),
+            Column(children: [
+              Text('Variety'),
+              Text(
+                  '${unitProductFruit.variety.toString().substring(trimEnumValueFruits)}',
+                  style: subtitleStyle)
+            ]),
           ],
         ),
       ),
@@ -66,12 +66,13 @@ class CartItemUnitFruit extends StatelessWidget {
   }
 }
 
-const trimEnumValueVegetables=8;
+const trimEnumValueVegetables = 8;
+
 class CartItemUnitVegetable extends StatelessWidget {
   final UnitProductVegetable unitProductVegetable;
 
-  const CartItemUnitVegetable({Key key, this.unitProductVegetable
-}) : super(key: key);
+  const CartItemUnitVegetable({Key? key, required this.unitProductVegetable})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -79,10 +80,9 @@ class CartItemUnitVegetable extends StatelessWidget {
     return Container(
       width: width,
       height: height * .15,
-       decoration: BoxDecoration(
+      decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey, width: 2))),
       child: ListTile(
-        
         leading: Container(
           child: Image(
               height: height * 0.35,
@@ -106,30 +106,26 @@ class CartItemUnitVegetable extends StatelessWidget {
                     style: subtitleStyle)
               ],
             ),
-             Column(
-                children: [Text('Rating'), 
-                Text('⭐${unitProductVegetable.rating}',style: subtitleStyle)
-                
-                ],
-              ),
-              Column(
-                children: [Text('UnitPrice'), 
-               
-                Text('${unitProductVegetable.unitCost}',style: subtitleStyle)
-                ]
-              ),
-              Column(
-                children: [Text('Variety'), 
-               
-                Text('${unitProductVegetable.variety.toString().substring(trimEnumValueVegetables)}',style: subtitleStyle)
-            
-                ]),
-                   Column(
-                children: [Text('Quantity'), 
-               
-                Text('${unitProductVegetable.quantity}',style: subtitleStyle)
-            
-                ]),
+            Column(
+              children: [
+                Text('Rating'),
+                Text('⭐${unitProductVegetable.rating}', style: subtitleStyle)
+              ],
+            ),
+            Column(children: [
+              Text('UnitPrice'),
+              Text('${unitProductVegetable.unitCost}', style: subtitleStyle)
+            ]),
+            Column(children: [
+              Text('Variety'),
+              Text(
+                  '${unitProductVegetable.variety.toString().substring(trimEnumValueVegetables)}',
+                  style: subtitleStyle)
+            ]),
+            Column(children: [
+              Text('Quantity'),
+              Text('${unitProductVegetable.quantity}', style: subtitleStyle)
+            ]),
           ],
         ),
       ),

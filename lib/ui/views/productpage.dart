@@ -1,10 +1,10 @@
-import 'package:dashcast/core/models/review_model.dart';
-import 'package:dashcast/core/viewmodels/notifiers/cart_notifier.dart';
-import 'package:dashcast/core/viewmodels/notifiers/product_notifier.dart';
-import 'package:dashcast/core/viewmodels/notifiers/wishlist_notifier.dart';
-import 'package:dashcast/ui/widgets/review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fruit_veg/core/models/review_model.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/cart_notifier.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/product_notifier.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/wishlist_notifier.dart';
+import 'package:fruit_veg/ui/widgets/review_card.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import '../../core/models/Product.dart';
@@ -16,7 +16,7 @@ import '../../ui/widgets/product_card.dart';
 class ProductPage extends StatefulWidget {
   final Product product;
 
-  const ProductPage({Key key, this.product}) : super(key: key);
+  const ProductPage({Key? key, required this.product}) : super(key: key);
   @override
   _ProductPageState createState() => _ProductPageState();
 }
@@ -125,7 +125,7 @@ class _ProductPageState extends State<ProductPage> {
                         fit: BoxFit.cover,
                       ),
                       title: Padding(
-                        padding: const EdgeInsets.only(bottom:28.0),
+                        padding: const EdgeInsets.only(bottom: 28.0),
                         child: Text(widget.product.name),
                       ),
                     ),
@@ -245,11 +245,11 @@ class _ProductPageState extends State<ProductPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
-                                  onTap: (){
-                                    Provider.of<WishListNotifier>(context).addProduct(widget.product);
-                                    
+                                  onTap: () {
+                                    Provider.of<WishListNotifier>(context)
+                                        .addProduct(widget.product);
                                   },
-                                                                  child: Container(
+                                  child: Container(
                                     height: 40,
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -257,7 +257,8 @@ class _ProductPageState extends State<ProductPage> {
                                         borderRadius: BorderRadius.horizontal(
                                             left: Radius.circular(30),
                                             right: Radius.circular(30))),
-                                    child: Center(child: Icon(Icons.favorite_border)),
+                                    child: Center(
+                                        child: Icon(Icons.favorite_border)),
                                   ),
                                 ),
                               ),
@@ -269,11 +270,10 @@ class _ProductPageState extends State<ProductPage> {
                                 child: GestureDetector(
                                   onTap: () {
                                     // add to cart
-                                    Provider.of<CartNotifier>(context).addProduct(
-                                      widget.product
-                                    );
+                                    Provider.of<CartNotifier>(context)
+                                        .addProduct(widget.product);
                                   },
-                                                                  child: Container(
+                                  child: Container(
                                     width: double.infinity,
                                     height: 40,
                                     decoration: BoxDecoration(
@@ -290,7 +290,8 @@ class _ProductPageState extends State<ProductPage> {
                                           Text(
                                             "Add to Cart",
                                             style: TextStyle(
-                                                color: Colors.white, fontSize: 14),
+                                                color: Colors.white,
+                                                fontSize: 14),
                                           ),
                                           // Row(
                                           //   mainAxisAlignment:
@@ -319,27 +320,28 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                        Text('Share',style: headerTextStyle,),
-                        RaisedButton(
-                          child: Icon(FontAwesomeIcons.share),
-                          onPressed: (){
-                            final RenderBox box = context.findRenderObject();
-                              Share.share('Share details of Product',
-                                  subject: 'Share product',
-                                  sharePositionOrigin:
-                                      box.localToGlobal(Offset.zero) &
-                                          box.size);
-                        })
-                      ],),
+                          Text(
+                            'Share',
+                            style: headerTextStyle,
+                          ),
+                          TextButton(
+                              child: Icon(FontAwesomeIcons.share),
+                              onPressed: () {
+                                final RenderObject? box =
+                                    context.findRenderObject();
+                                Share.share('Share details of Product',
+                                    subject: 'Share product',
+                                    sharePositionOrigin: box!.paintBounds);
+                              })
+                        ],
+                      ),
                     )
                   ],
-                ))
-                ,
-
+                )),
           ],
         )),
       ),
@@ -359,7 +361,8 @@ class _ProductPageState extends State<ProductPage> {
 class DetailsTab extends StatelessWidget {
   final Function buildRelatedProducts;
   final Product product;
-  const DetailsTab({Key key, this.product, this.buildRelatedProducts})
+  const DetailsTab(
+      {Key? key, required this.product, required this.buildRelatedProducts})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -447,8 +450,8 @@ class ReviewTab extends StatelessWidget {
       color: Color(0xFFF0F4F8),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-              child: Column(
-          children:  reviews
+        child: Column(
+          children: reviews
               .map((review) => ReviewItem(
                     userReview: review,
                   ))
@@ -462,7 +465,8 @@ class ReviewTab extends StatelessWidget {
 class ProductTab extends StatefulWidget {
   final Function buildRelatedProducts;
   final Product product;
-  const ProductTab({Key key, this.product, this.buildRelatedProducts})
+  const ProductTab(
+      {Key? key, required this.product, required this.buildRelatedProducts})
       : super(key: key);
   @override
   _ProductTabState createState() => _ProductTabState();
@@ -471,8 +475,8 @@ class ProductTab extends StatefulWidget {
 class _ProductTabState extends State<ProductTab> {
   int colorIndex = 1;
   int sizeIndex = 1;
-  double _weight=1.0;
-  void prepareTodAddToCart(){
+  double _weight = 1.0;
+  void prepareTodAddToCart() {
     // create same product with chosen weight
   }
   @override
@@ -553,53 +557,57 @@ class _ProductTabState extends State<ProductTab> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                      Text('Select Weight',
-                        style: TextStyle(
-                            color: Color(0xFF0E7C86),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)),
-                    Text('${_weight.toStringAsPrecision(3)} kg',style: TextStyle(
-                            color: Color(0xFF0E7C86),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)),
-                    ],),
+                        Text('Select Weight',
+                            style: TextStyle(
+                                color: Color(0xFF0E7C86),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold)),
+                        Text('${_weight.toStringAsPrecision(3)} kg',
+                            style: TextStyle(
+                                color: Color(0xFF0E7C86),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    ),
                     SizedBox(
                       height: 10,
                     ),
                     Slider(
                       max: widget.product.maxWeight,
                       min: 0,
-                      value: _weight, onChanged: (value) {
+                      value: _weight,
+                      onChanged: (value) {
                         setState(() {
-                          _weight=value;
+                          _weight = value;
                         });
-                      },),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         Column(
-                        children: [
-                          Text('Price per Kilo',
-                           style: TextStyle(
-                            color: Color(0xFF0E7C86),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)
-                      ),
-                      Text('\$${widget.product.costPerKilo}')
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text('Total Cost',
-                           style: TextStyle(
-                            color: Color(0xFF0E7C86),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)
-                      ),
-                      Text('\$${(widget.product.costPerKilo*_weight).toStringAsPrecision(3)}')
-                        ],
-                      )
-                      ],)
+                          children: [
+                            Text('Price per Kilo',
+                                style: TextStyle(
+                                    color: Color(0xFF0E7C86),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold)),
+                            Text('\$${widget.product.costPerKilo}')
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text('Total Cost',
+                                style: TextStyle(
+                                    color: Color(0xFF0E7C86),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold)),
+                            Text(
+                                '\$${(widget.product.costPerKilo * _weight).toStringAsPrecision(3)}')
+                          ],
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),

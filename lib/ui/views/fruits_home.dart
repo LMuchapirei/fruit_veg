@@ -1,10 +1,10 @@
-import 'package:clay_containers/widgets/clay_containers.dart';
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/core/viewmodels/notifiers/cart_notifier.dart';
-import 'package:dashcast/core/viewmodels/notifiers/fruit_products_notifier.dart';
-import 'package:dashcast/ui/views/cart.dart';
-import 'package:dashcast/ui/viewutils/constants.dart';
-import 'package:dashcast/ui/viewutils/textutils.dart';
+import 'package:clay_containers/widgets/clay_container.dart';
+import 'package:fruit_veg/core/models/Product.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/cart_notifier.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/fruit_products_notifier.dart';
+import 'package:fruit_veg/ui/views/cart.dart';
+import 'package:fruit_veg/ui/viewutils/constants.dart';
+import 'package:fruit_veg/ui/viewutils/textutils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,8 @@ class FruitsCurrentVariety extends StatefulWidget {
   final FruitVariety fruitVariety;
   final String categoryName;
 
-  const FruitsCurrentVariety({Key key, this.categoryName, this.fruitVariety})
+  const FruitsCurrentVariety(
+      {Key? key, required this.categoryName, required this.fruitVariety})
       : super(key: key);
   @override
   _FruitsCurrentVarietyState createState() => _FruitsCurrentVarietyState();
@@ -23,13 +24,14 @@ class _FruitsCurrentVarietyState extends State<FruitsCurrentVariety> {
   @override
   Widget build(BuildContext context) {
     final fruitProvider = Provider.of<FruitProductNotifier>(context);
-    FruitProductCategory fruitCategory;
+    FruitProductCategory fruitCategory = FruitProductCategory(
+        categoryName: '',
+        loadingTabsCount: FruitLoadingTabsCount(),
+        fruitCategory: FruitVariety.Miscelaneous); // TODO this may be buggy
     print("Categories length " + fruitProvider.category.length.toString());
     fruitProvider.category.forEach((element) {
       if (element.fruitCategory == widget.fruitVariety) fruitCategory = element;
     });
-    print("products in this category  ${fruitCategory.products.length}");
-
     return Container(
       child: Scaffold(
           body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -41,10 +43,10 @@ class _FruitsCurrentVarietyState extends State<FruitsCurrentVariety> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(Icons.arrow_back_ios)),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(Icons.arrow_back_ios)),
                   SizedBox(
                     width: 36,
                   ),
@@ -87,7 +89,7 @@ class _FruitsCurrentVarietyState extends State<FruitsCurrentVariety> {
 class FruitCard extends StatelessWidget {
   final FruitProduct fruitProduct;
 
-  const FruitCard({Key key, this.fruitProduct}) : super(key: key);
+  const FruitCard({Key? key, required this.fruitProduct}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +109,7 @@ class FruitCard extends StatelessWidget {
           width: 270,
           // color: Colors.red,
           child: Stack(
-            children: <Widget>[    
+            children: <Widget>[
               // Food Image
               Positioned(
                 top: 10,
@@ -133,7 +135,7 @@ class FruitCard extends StatelessWidget {
                   "\$${fruitProduct.costPerKilo} per Kilo",
                   style: Theme.of(context)
                       .textTheme
-                      .headline5
+                      .headline5!
                       .copyWith(color: Colors.black.withOpacity(.65)),
                 ),
               ),
@@ -167,12 +169,12 @@ class FruitCard extends StatelessWidget {
                       Text(
                         fruitProduct.variety.toString().substring(13),
                       ),
-                      SizedBox(height: 16,),
+                      SizedBox(
+                        height: 16,
+                      ),
                       Text(
                         'Common recipes using ${fruitProduct.name}',
-                        style: TextStyle(
-                          color:kTextColor.withOpacity(.65)
-                        ),
+                        style: TextStyle(color: kTextColor.withOpacity(.65)),
                       )
                     ],
                   ),
@@ -189,7 +191,7 @@ class FruitCard extends StatelessWidget {
 class DetailsScreen extends StatefulWidget {
   final FruitProduct fruitProduct;
 
-  const DetailsScreen({Key key, this.fruitProduct}) : super(key: key);
+  const DetailsScreen({Key? key, required this.fruitProduct}) : super(key: key);
 
   @override
   _DetailsScreenState createState() => _DetailsScreenState();
@@ -222,7 +224,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       Text(widget.fruitProduct.name,
                           style: headerTextStyle.copyWith(
                             fontSize:
-                                Theme.of(context).textTheme.headline5.fontSize,
+                                Theme.of(context).textTheme.headline5!.fontSize,
                           )),
                       Opacity(
                         opacity: 0,
@@ -259,7 +261,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               text: "Select the weight\n",
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline6
+                                  .headline6!
                                   .apply(color: buttonColor),
                             ),
                             TextSpan(
@@ -273,14 +275,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Text(
                         "Cost per kilo \$${widget.fruitProduct.costPerKilo}",
-                        style: Theme.of(context).textTheme.headline6.copyWith(
-                            fontWeight: FontWeight.w500, color: headerTextColor),
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: headerTextColor),
                       )
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:18.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
                   child: Slider(
                     max: widget.fruitProduct.maxWeight,
                     min: 0,
@@ -333,10 +336,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 SizedBox(height: 20),
                 // Spacer(),
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: 10,
-                    right: 10,
-                    bottom: 30),
+                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -360,7 +360,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 "Add to bag",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .button
+                                    .button!
                                     .apply(color: Colors.white),
                               ),
                               SizedBox(width: 30),
@@ -416,7 +416,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     "${Provider.of<CartNotifier>(context).itemsCount}",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .button
+                                        .button!
                                         .copyWith(
                                             color: kPrimaryColor, fontSize: 16),
                                   ),

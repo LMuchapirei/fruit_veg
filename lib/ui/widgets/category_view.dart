@@ -1,12 +1,12 @@
-import 'package:dashcast/core/models/Product.dart';
-import 'package:dashcast/core/viewmodels/notifiers/product_notifier.dart';
-import 'package:dashcast/ui/views/vegetable_details.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_veg/core/models/Product.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/product_notifier.dart';
+import 'package:fruit_veg/ui/views/vegetable_details.dart';
 
 class CategoryList extends StatefulWidget {
   final Variety variety;
 
-  const CategoryList({Key key, this.variety}) : super(key: key);
+  const CategoryList({Key? key, required this.variety}) : super(key: key);
   @override
   _CategoryListState createState() => _CategoryListState();
 }
@@ -87,8 +87,11 @@ class _CategoryListState extends State<CategoryList> {
   Widget _getProductCard(Product product) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (_)=>VegetableDetails(product: product,variety: product.variety,)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => VegetableDetails(
+                  product: product,
+                  variety: product.variety,
+                )));
       },
       child: Padding(
         padding: const EdgeInsets.all(14.0),
@@ -102,7 +105,7 @@ class _CategoryListState extends State<CategoryList> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xFF399D63)),
-                    // color: const Color(0xFF38BEC9)),
+                // color: const Color(0xFF38BEC9)),
                 height: 250,
                 width: 225,
                 child: Column(

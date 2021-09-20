@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:dashcast/core/models/UserModel.dart';
-import 'package:dashcast/core/models/user_model.dart';
-import 'package:dashcast/core/viewmodels/notifiers/product_notifier.dart';
+import 'package:fruit_veg/core/models/UserModel.dart';
+import 'package:fruit_veg/core/models/user_model.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/product_notifier.dart';
 
 import './Product.dart';
 
@@ -14,36 +14,36 @@ class Order {
   final UserModel owner;
   final List<Product> product;
   final DateTime dateCreated;
-  bool delivered;
-  DateTime datePaid;
-  bool paid;
+  bool delivered = false;
+  DateTime datePaid = DateTime.now();
+  bool paid = false;
   final String invoiceCode;
   String paymentCode;
   final DateTime expectedDeliverydate;
   final int saleNumber;
   final int itemsCount;
-  double itemsCost;
-  bool gotIssues;
-  List<String> issues;
-  double orderWeight;
+  final double itemsCost;
+  final bool gotIssues = false;
+  List<String> issues = [];
+  double orderWeight = 0.0;
 
   double get totalCost =>
-      (itemsCost + product.itemWeight * itemsCount * shippingRate) *
+      (itemsCost + product[0].itemWeight * itemsCount * shippingRate) *
       ((100 + VAT) / 100);
 
   Order(
-      {this.owner,
-      this.saleNumber,
-      this.itemsCount,
-      this.datePaid,
-      this.product,
-      this.dateCreated,
-      this.expectedDeliverydate,
-      this.delivered,
-      this.paid,
-      this.invoiceCode,
-      this.paymentCode})
-      : itemsCost = itemsCount * product.price,
+      {required this.owner,
+      required this.saleNumber,
+      required this.itemsCount,
+      required this.datePaid,
+      required this.product,
+      required this.dateCreated,
+      required this.expectedDeliverydate,
+      required this.delivered,
+      required this.paid,
+      required this.invoiceCode,
+      required this.paymentCode})
+      : itemsCost = itemsCount * product.length * product[0].price,
         issues = [];
   operator ==(other) =>
       (other is Order) &&

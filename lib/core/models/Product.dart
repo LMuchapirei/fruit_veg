@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class Product extends Equatable {
   final String imagePath;
@@ -17,19 +16,19 @@ class Product extends Equatable {
   final double costPerKilo;
   double _itemWeight;
   Product(
-      {this.maxWeight,
-      this.costPerKilo,
-      this.leftInStock,
-      this.brand = "Not Available",
-      this.description = "Contact Seller",
-      this.discount,
-      @required this.imagePath,
-      @required this.name,
-      @required this.variety,
-      @required this.price,
-      @required this.barCode,
-      @required this.sales,
-      @required this.rating})
+      {required this.maxWeight,
+      required this.costPerKilo,
+      required this.leftInStock,
+      required this.brand,
+      required this.description,
+      required this.discount,
+      required this.imagePath,
+      required this.name,
+      required this.variety,
+      required this.price,
+      required this.barCode,
+      required this.sales,
+      required this.rating})
       : _itemWeight = 2;
 
   set weight(value) => _itemWeight = value;
@@ -52,19 +51,7 @@ class Product extends Equatable {
         costPerKilo,
         _itemWeight
       ];
-  // operator ==(other)=>
-  // (other is Product) &&(name==other.name)&&(price==other.price)&&(barCode==other.barCode);
-
-  // int get hashCode=>name.hashCode^price.hashCode^barCode.hashCode;
 }
-
-// enum Variety{
-//   Desktops_Notebooks,
-//   Smartphones,
-//   Components,
-//   Software,
-//   Other
-// }
 
 class FruitProduct extends Equatable {
   final String imagePath;
@@ -82,19 +69,19 @@ class FruitProduct extends Equatable {
   final double costPerKilo;
   double _itemWeight;
   FruitProduct(
-      {this.maxWeight,
-      this.costPerKilo,
-      this.leftInStock,
-      this.brand = "Not Available",
-      this.description = "Contact Seller",
-      this.discount,
-      @required this.imagePath,
-      @required this.name,
-      @required this.variety,
-      @required this.price,
-      @required this.barCode,
-      @required this.sales,
-      @required this.rating})
+      {required this.maxWeight,
+      required this.costPerKilo,
+      required this.leftInStock,
+      required this.brand,
+      required this.description,
+      required this.discount,
+      required this.imagePath,
+      required this.name,
+      required this.variety,
+      required this.price,
+      required this.barCode,
+      required this.sales,
+      required this.rating})
       : _itemWeight = 2;
   set weight(value) => _itemWeight = value;
   get itemCost => _itemWeight * costPerKilo;
@@ -133,17 +120,17 @@ class UnitProductFruit {
   int quantity;
 
   UnitProductFruit(
-      {this.imagePath,
-      this.name,
-      this.variety,
+      {required this.imagePath,
+      required this.name,
+      required this.variety,
       // this.brand,
-      this.barCode,
-      this.sales,
-      this.discount,
-      this.description,
-      this.rating,
-      this.leftInStock,
-      this.unitCost})
+      required this.barCode,
+      required this.sales,
+      required this.discount,
+      required this.description,
+      required this.rating,
+      required this.leftInStock,
+      required this.unitCost})
       : quantity = 0;
   operator ==(other) =>
       other is UnitProductFruit &&
@@ -187,16 +174,16 @@ class UnitProductVegetable extends Equatable {
   int quantity;
 
   UnitProductVegetable(
-      {this.imagePath,
-      this.name,
-      this.variety,
-      this.barCode,
-      this.sales,
-      this.discount,
-      this.description,
-      this.rating,
-      this.leftInStock,
-      this.unitCost})
+      {required this.imagePath,
+      required this.name,
+      required this.variety,
+      required this.barCode,
+      required this.sales,
+      required this.discount,
+      required this.description,
+      required this.rating,
+      required this.leftInStock,
+      required this.unitCost})
       : quantity = 0;
   @override
   // TODO: implement props

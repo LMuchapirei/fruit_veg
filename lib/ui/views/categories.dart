@@ -11,7 +11,7 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {

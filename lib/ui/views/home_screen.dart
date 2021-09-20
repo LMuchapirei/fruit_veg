@@ -1,13 +1,11 @@
 import 'dart:collection';
-import 'package:dashcast/core/viewmodels/notifiers/cart_notifier.dart';
-import 'package:dashcast/core/viewmodels/notifiers/product_notifier.dart';
-import 'package:dashcast/ui/views/categories.dart';
-import 'package:dashcast/ui/views/login_screen.dart';
-// import 'package:dashcast/ui/widgets/bottombar.dart';
-import 'package:dashcast/ui/widgets/recommendedFruits.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:graphql/client.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/cart_notifier.dart';
+import 'package:fruit_veg/core/viewmodels/notifiers/product_notifier.dart';
+import 'package:fruit_veg/ui/views/categories.dart';
+import 'package:fruit_veg/ui/views/login_screen.dart';
+import 'package:fruit_veg/ui/widgets/recommendedFruits.dart';
 import 'package:provider/provider.dart';
 import '../../core/models/Product.dart';
 import '../../ui/views/account.dart';
@@ -45,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // very important function
   SliverGrid _buildRecommendVegetableList(
       int index, UnmodifiableListView<ProductCategory> category) {
-    SliverGrid sliverGrid;
+    SliverGrid sliverGrid = SliverGrid.count(crossAxisCount: 5);
     switch (index) {
       case 1:
         final leafyGreenCategory = category
@@ -318,39 +316,40 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ));
                                 },
                                 child: Container(
-                      height: 40.0,
-                      width: 40.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.0),
-                          color: buttonColor),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topRight,
-                                                      child: Container(
-                  height: 18.0,
-                  width: 18.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(9.0),
-                    color: Colors.white
-                  ),
-                  child: Center(
-                    // this should be linked to the number of items in cart
-                    child: Text(
-                      '${Provider.of<CartNotifier>(context).itemsCount}',
-                      style: TextStyle(color: Color(0xFF399D63),
-                      fontFamily: 'Montserrat'
-                      ),
-                    ),
-                  ),
-                ),
-                          ),
-                          Center(
-                            child: Icon(Icons.shopping_cart, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
+                                  height: 40.0,
+                                  width: 40.0,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: buttonColor),
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: Container(
+                                          height: 18.0,
+                                          width: 18.0,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(9.0),
+                                              color: Colors.white),
+                                          child: Center(
+                                            // this should be linked to the number of items in cart
+                                            child: Text(
+                                              '${Provider.of<CartNotifier>(context).itemsCount}',
+                                              style: TextStyle(
+                                                  color: Color(0xFF399D63),
+                                                  fontFamily: 'Montserrat'),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Icon(Icons.shopping_cart,
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: 16,
@@ -477,7 +476,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     }
                                     return ListView(
                                         scrollDirection: Axis.horizontal,
-                                        children: snapshot.data
+                                        children: snapshot.data!
                                             .map(
                                               (Product product) => Padding(
                                                 padding:
@@ -931,7 +930,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //                     GraphQLClient(link: _httpLink, cache: InMemoryCache());
 
 //                 const String makeMutation = r'''
-   
+
 // mutation{
 //   addProductToCart(cartInput:{
 //     ownerId:"5ebfba3db3317813902207e1"
@@ -941,7 +940,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //     imagePath
 //   }
 // }
-   
+
 //   ''';
 
 //                 final QueryOptions options =

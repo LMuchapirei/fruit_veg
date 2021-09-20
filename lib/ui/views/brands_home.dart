@@ -525,7 +525,13 @@ class ProductSearch extends SearchDelegate<Product> {
                 price: 12,
                 barCode: 'barCode',
                 sales: 12,
-                rating: 4));
+                rating: 4,
+                brand: '',
+                costPerKilo: 0.0,
+                description: '',
+                discount: 0.0,
+                leftInStock: 0,
+                maxWeight: 0.0));
       },
     );
   }

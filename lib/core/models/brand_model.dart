@@ -11,7 +11,7 @@ class Brand{
   final Color brandThemeColor;
   final String brandDescription;
   final String url;
-  Brand({this.brandDescription,this.url,this.brandName, this.rating, this.imagePath,this.brandThemeColor})
+  Brand({required this.brandDescription,required this.url,required this.brandName, required this.rating, required this.imagePath,required this.brandThemeColor})
   :brandId=Random().nextInt(100000);   //replace with a cached dynamically loaded image
 
     operator ==(other)=>
